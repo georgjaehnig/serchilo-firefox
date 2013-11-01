@@ -1,0 +1,501 @@
+<?xml version="1.0"?>
+
+
+<box xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+	
+	>
+
+	<setting id="usage_type" pref="extensions.serchilo.usage_type" type="menulist" title="Use Serchilo">
+  <menulist>
+    <menupopup>
+      <menuitem value="n" label="without a user account"/>
+      <menuitem value="u" label="with a user account"/>
+    </menupopup>
+  </menulist>
+</setting>
+
+
+
+<setting 
+	type="menulist"
+	id="language_namespace"
+	pref="extensions.serchilo.language_namespace"
+	title="Language namespace"
+>
+  <menulist>
+    <menupopup>
+<menuitem value="ab" label="Abkhazian"/>
+<menuitem value="aa" label="Afar"/>
+<menuitem value="af" label="Afrikaans"/>
+<menuitem value="ak" label="Akan"/>
+<menuitem value="sq" label="Albanian"/>
+<menuitem value="am" label="Amharic"/>
+<menuitem value="ar" label="Arabic"/>
+<menuitem value="hy" label="Armenian"/>
+<menuitem value="as" label="Assamese"/>
+<menuitem value="av" label="Avar"/>
+<menuitem value="ae" label="Avestan"/>
+<menuitem value="ay" label="Aymara"/>
+<menuitem value="az" label="Azerbaijani"/>
+<menuitem value="bm" label="Bambara"/>
+<menuitem value="ba" label="Bashkir"/>
+<menuitem value="eu" label="Basque"/>
+<menuitem value="be" label="Belarusian"/>
+<menuitem value="bn" label="Bengali"/>
+<menuitem value="dz" label="Bhutani"/>
+<menuitem value="bh" label="Bihari"/>
+<menuitem value="bi" label="Bislama"/>
+<menuitem value="bs" label="Bosnian"/>
+<menuitem value="br" label="Breton"/>
+<menuitem value="bg" label="Bulgarian"/>
+<menuitem value="my" label="Burmese"/>
+<menuitem value="km" label="Cambodian"/>
+<menuitem value="ca" label="Catalan"/>
+<menuitem value="ch" label="Chamorro"/>
+<menuitem value="ce" label="Chechen"/>
+<menuitem value="ny" label="Chichewa"/>
+<menuitem value="cv" label="Chuvash"/>
+<menuitem value="kw" label="Cornish"/>
+<menuitem value="co" label="Corsican"/>
+<menuitem value="cr" label="Cree"/>
+<menuitem value="hr" label="Croatian"/>
+<menuitem value="cs" label="Czech"/>
+<menuitem value="da" label="Danish"/>
+<menuitem value="nl" label="Dutch"/>
+<menuitem value="en" label="English"/>
+<menuitem value="eo" label="Esperanto"/>
+<menuitem value="et" label="Estonian"/>
+<menuitem value="ee" label="Ewe"/>
+<menuitem value="fo" label="Faeroese"/>
+<menuitem value="fj" label="Fiji"/>
+<menuitem value="fi" label="Finnish"/>
+<menuitem value="fr" label="French"/>
+<menuitem value="fy" label="Frisian"/>
+<menuitem value="ff" label="Fulah"/>
+<menuitem value="gl" label="Galician"/>
+<menuitem value="ka" label="Georgian"/>
+<menuitem value="de" label="German"/>
+<menuitem value="el" label="Greek"/>
+<menuitem value="kl" label="Greenlandic"/>
+<menuitem value="gn" label="Guarani"/>
+<menuitem value="gu" label="Gujarati"/>
+<menuitem value="ht" label="Haitian Creole"/>
+<menuitem value="ha" label="Hausa"/>
+<menuitem value="he" label="Hebrew"/>
+<menuitem value="hz" label="Herero"/>
+<menuitem value="hi" label="Hindi"/>
+<menuitem value="ho" label="Hiri Motu"/>
+<menuitem value="hu" label="Hungarian"/>
+<menuitem value="is" label="Icelandic"/>
+<menuitem value="ig" label="Igbo"/>
+<menuitem value="id" label="Indonesian"/>
+<menuitem value="ia" label="Interlingua"/>
+<menuitem value="ie" label="Interlingue"/>
+<menuitem value="iu" label="Inuktitut"/>
+<menuitem value="ik" label="Inupiak"/>
+<menuitem value="ga" label="Irish"/>
+<menuitem value="it" label="Italian"/>
+<menuitem value="ja" label="Japanese"/>
+<menuitem value="jv" label="Javanese"/>
+<menuitem value="kn" label="Kannada"/>
+<menuitem value="kr" label="Kanuri"/>
+<menuitem value="ks" label="Kashmiri"/>
+<menuitem value="kk" label="Kazakh"/>
+<menuitem value="ki" label="Kikuyu"/>
+<menuitem value="rw" label="Kinyarwanda"/>
+<menuitem value="rn" label="Kirundi"/>
+<menuitem value="kv" label="Komi"/>
+<menuitem value="kg" label="Kongo"/>
+<menuitem value="ko" label="Korean"/>
+<menuitem value="ku" label="Kurdish"/>
+<menuitem value="kj" label="Kwanyama"/>
+<menuitem value="ky" label="Kyrgyz"/>
+<menuitem value="lo" label="Laothian"/>
+<menuitem value="la" label="Latin"/>
+<menuitem value="lv" label="Latvian"/>
+<menuitem value="ln" label="Lingala"/>
+<menuitem value="lt" label="Lithuanian"/>
+<menuitem value="lg" label="Luganda"/>
+<menuitem value="lb" label="Luxembourgish"/>
+<menuitem value="mk" label="Macedonian"/>
+<menuitem value="mg" label="Malagasy"/>
+<menuitem value="ms" label="Malay"/>
+<menuitem value="ml" label="Malayalam"/>
+<menuitem value="dv" label="Maldivian"/>
+<menuitem value="mt" label="Maltese"/>
+<menuitem value="gv" label="Manx"/>
+<menuitem value="mr" label="Marathi"/>
+<menuitem value="mh" label="Marshallese"/>
+<menuitem value="mo" label="Moldavian"/>
+<menuitem value="mn" label="Mongolian"/>
+<menuitem value="mi" label="Māori"/>
+<menuitem value="na" label="Nauru"/>
+<menuitem value="nv" label="Navajo"/>
+<menuitem value="ng" label="Ndonga"/>
+<menuitem value="ne" label="Nepali"/>
+<menuitem value="nd" label="North Ndebele"/>
+<menuitem value="se" label="Northern Sami"/>
+<menuitem value="nb" label="Norwegian Bokmål"/>
+<menuitem value="nn" label="Norwegian Nynorsk"/>
+<menuitem value="oc" label="Occitan"/>
+<menuitem value="cu" label="Old Slavonic"/>
+<menuitem value="or" label="Oriya"/>
+<menuitem value="om" label="Oromo"/>
+<menuitem value="os" label="Ossetian"/>
+<menuitem value="pi" label="Pali"/>
+<menuitem value="ps" label="Pashto"/>
+<menuitem value="fa" label="Persian"/>
+<menuitem value="pl" label="Polish"/>
+<menuitem value="pt" label="Portuguese          "/>
+<menuitem value="pa" label="Punjabi"/>
+<menuitem value="qu" label="Quechua"/>
+<menuitem value="rm" label="Rhaeto-Romance"/>
+<menuitem value="ro" label="Romanian"/>
+<menuitem value="ru" label="Russian"/>
+<menuitem value="sm" label="Samoan"/>
+<menuitem value="sg" label="Sango"/>
+<menuitem value="sa" label="Sanskrit"/>
+<menuitem value="sc" label="Sardinian"/>
+<menuitem value="gd" label="Scots Gaelic"/>
+<menuitem value="sr" label="Serbian"/>
+<menuitem value="sh" label="Serbo-Croatian"/>
+<menuitem value="st" label="Sesotho"/>
+<menuitem value="tn" label="Setswana"/>
+<menuitem value="sn" label="Shona"/>
+<menuitem value="sd" label="Sindhi"/>
+<menuitem value="si" label="Sinhala"/>
+<menuitem value="ss" label="Siswati"/>
+<menuitem value="sk" label="Slovak"/>
+<menuitem value="sl" label="Slovenian"/>
+<menuitem value="so" label="Somali"/>
+<menuitem value="nr" label="South Ndebele"/>
+<menuitem value="es" label="Spanish"/>
+<menuitem value="su" label="Sudanese"/>
+<menuitem value="sw" label="Swahili"/>
+<menuitem value="sv" label="Swedish"/>
+<menuitem value="tl" label="Tagalog"/>
+<menuitem value="ty" label="Tahitian"/>
+<menuitem value="tg" label="Tajik"/>
+<menuitem value="ta" label="Tamil"/>
+<menuitem value="tt" label="Tatar"/>
+<menuitem value="te" label="Telugu"/>
+<menuitem value="th" label="Thai"/>
+<menuitem value="bo" label="Tibetan"/>
+<menuitem value="ti" label="Tigrinya"/>
+<menuitem value="to" label="Tonga"/>
+<menuitem value="ts" label="Tsonga"/>
+<menuitem value="tr" label="Turkish"/>
+<menuitem value="tk" label="Turkmen"/>
+<menuitem value="tw" label="Twi"/>
+<menuitem value="ug" label="Uighur"/>
+<menuitem value="uk" label="Ukrainian"/>
+<menuitem value="ur" label="Urdu"/>
+<menuitem value="uz" label="Uzbek"/>
+<menuitem value="ve" label="Venda"/>
+<menuitem value="vi" label="Vietnamese"/>
+<menuitem value="cy" label="Welsh"/>
+<menuitem value="wo" label="Wolof"/>
+<menuitem value="xh" label="Xhosa"/>
+<menuitem value="yi" label="Yiddish"/>
+<menuitem value="yo" label="Yoruba"/>
+<menuitem value="za" label="Zhuang"/>
+<menuitem value="zu" label="Zulu"/>
+
+    </menupopup>
+  </menulist>
+</setting>
+
+<setting 
+	type="menulist"
+	id="country_namespace"
+	pref="extensions.serchilo.country_namespace"
+	title="Country namespace"
+>
+  <menulist>
+    <menupopup>
+<menuitem value="afg" label="Afghanistan"/>
+<menuitem value="alb" label="Albania"/>
+<menuitem value="dza" label="Algeria"/>
+<menuitem value="asm" label="American Samoa"/>
+<menuitem value="and" label="Andorra"/>
+<menuitem value="ago" label="Angola"/>
+<menuitem value="aia" label="Anguilla"/>
+<menuitem value="ata" label="Antarctica"/>
+<menuitem value="atg" label="Antigua and Barbuda"/>
+<menuitem value="arg" label="Argentina"/>
+<menuitem value="arm" label="Armenia"/>
+<menuitem value="abw" label="Aruba"/>
+<menuitem value="aus" label="Australia"/>
+<menuitem value="aut" label="Austria"/>
+<menuitem value="aze" label="Azerbaijan"/>
+<menuitem value="bhs" label="Bahamas"/>
+<menuitem value="bhr" label="Bahrain"/>
+<menuitem value="bgd" label="Bangladesh"/>
+<menuitem value="brb" label="Barbados"/>
+<menuitem value="blr" label="Belarus"/>
+<menuitem value="bel" label="Belgium"/>
+<menuitem value="blz" label="Belize"/>
+<menuitem value="ben" label="Benin"/>
+<menuitem value="bmu" label="Bermuda"/>
+<menuitem value="btn" label="Bhutan"/>
+<menuitem value="bol" label="Bolivia, Plurinational State of"/>
+<menuitem value="bes" label="Bonaire, Sint Eustatius and Saba"/>
+<menuitem value="bih" label="Bosnia and Herzegovina"/>
+<menuitem value="bwa" label="Botswana"/>
+<menuitem value="bvt" label="Bouvet Island"/>
+<menuitem value="bra" label="Brazil"/>
+<menuitem value="iot" label="British Indian Ocean Territory"/>
+<menuitem value="brn" label="Brunei Darussalam"/>
+<menuitem value="bgr" label="Bulgaria"/>
+<menuitem value="bfa" label="Burkina Faso"/>
+<menuitem value="bdi" label="Burundi"/>
+<menuitem value="khm" label="Cambodia"/>
+<menuitem value="cmr" label="Cameroon"/>
+<menuitem value="can" label="Canada"/>
+<menuitem value="cpv" label="Cape Verde"/>
+<menuitem value="cym" label="Cayman Islands"/>
+<menuitem value="caf" label="Central African Republic"/>
+<menuitem value="tcd" label="Chad"/>
+<menuitem value="chl" label="Chile"/>
+<menuitem value="chn" label="China"/>
+<menuitem value="cxr" label="Christmas Island"/>
+<menuitem value="cck" label="Cocos (Keeling) Islands"/>
+<menuitem value="col" label="Colombia"/>
+<menuitem value="com" label="Comoros"/>
+<menuitem value="cog" label="Congo"/>
+<menuitem value="cod" label="Congo, the Democratic Republic of the"/>
+<menuitem value="cok" label="Cook Islands"/>
+<menuitem value="cri" label="Costa Rica"/>
+<menuitem value="hrv" label="Croatia"/>
+<menuitem value="cub" label="Cuba"/>
+<menuitem value="cuw" label="Curaçao"/>
+<menuitem value="cyp" label="Cyprus"/>
+<menuitem value="cze" label="Czech Republic"/>
+<menuitem value="civ" label="Côte d'Ivoire"/>
+<menuitem value="dnk" label="Denmark"/>
+<menuitem value="dji" label="Djibouti"/>
+<menuitem value="dma" label="Dominica"/>
+<menuitem value="dom" label="Dominican Republic"/>
+<menuitem value="ecu" label="Ecuador"/>
+<menuitem value="egy" label="Egypt"/>
+<menuitem value="slv" label="El Salvador"/>
+<menuitem value="gnq" label="Equatorial Guinea"/>
+<menuitem value="eri" label="Eritrea"/>
+<menuitem value="est" label="Estonia"/>
+<menuitem value="eth" label="Ethiopia"/>
+<menuitem value="flk" label="Falkland Islands (Malvinas)"/>
+<menuitem value="fro" label="Faroe Islands"/>
+<menuitem value="fji" label="Fiji"/>
+<menuitem value="fin" label="Finland"/>
+<menuitem value="fra" label="France"/>
+<menuitem value="guf" label="French Guiana"/>
+<menuitem value="pyf" label="French Polynesia"/>
+<menuitem value="atf" label="French Southern Territories"/>
+<menuitem value="gab" label="Gabon"/>
+<menuitem value="gmb" label="Gambia"/>
+<menuitem value="geo" label="Georgia"/>
+<menuitem value="deu" label="Germany"/>
+<menuitem value="gha" label="Ghana"/>
+<menuitem value="gib" label="Gibraltar"/>
+<menuitem value="grc" label="Greece"/>
+<menuitem value="grl" label="Greenland"/>
+<menuitem value="grd" label="Grenada"/>
+<menuitem value="glp" label="Guadeloupe"/>
+<menuitem value="gum" label="Guam"/>
+<menuitem value="gtm" label="Guatemala"/>
+<menuitem value="ggy" label="Guernsey"/>
+<menuitem value="gin" label="Guinea"/>
+<menuitem value="gnb" label="Guinea-Bissau"/>
+<menuitem value="guy" label="Guyana"/>
+<menuitem value="hti" label="Haiti"/>
+<menuitem value="hmd" label="Heard Island and McDonald Islands"/>
+<menuitem value="vat" label="Holy See (Vatican City State)"/>
+<menuitem value="hnd" label="Honduras"/>
+<menuitem value="hkg" label="Hong Kong"/>
+<menuitem value="hun" label="Hungary"/>
+<menuitem value="isl" label="Iceland"/>
+<menuitem value="ind" label="India"/>
+<menuitem value="idn" label="Indonesia"/>
+<menuitem value="irn" label="Iran, Islamic Republic of"/>
+<menuitem value="irq" label="Iraq"/>
+<menuitem value="irl" label="Ireland"/>
+<menuitem value="imn" label="Isle of Man"/>
+<menuitem value="isr" label="Israel"/>
+<menuitem value="ita" label="Italy"/>
+<menuitem value="jam" label="Jamaica"/>
+<menuitem value="jpn" label="Japan"/>
+<menuitem value="jey" label="Jersey"/>
+<menuitem value="jor" label="Jordan"/>
+<menuitem value="kaz" label="Kazakhstan"/>
+<menuitem value="ken" label="Kenya"/>
+<menuitem value="kir" label="Kiribati"/>
+<menuitem value="prk" label="Korea, Democratic People's Republic of"/>
+<menuitem value="kor" label="Korea, Republic of"/>
+<menuitem value="kwt" label="Kuwait"/>
+<menuitem value="kgz" label="Kyrgyzstan"/>
+<menuitem value="lao" label="Lao People's Democratic Republic"/>
+<menuitem value="lva" label="Latvia"/>
+<menuitem value="lbn" label="Lebanon"/>
+<menuitem value="lso" label="Lesotho"/>
+<menuitem value="lbr" label="Liberia"/>
+<menuitem value="lby" label="Libya"/>
+<menuitem value="lie" label="Liechtenstein"/>
+<menuitem value="ltu" label="Lithuania"/>
+<menuitem value="lux" label="Luxembourg"/>
+<menuitem value="mac" label="Macao"/>
+<menuitem value="mkd" label="Macedonia, the former Yugoslav Republic of"/>
+<menuitem value="mdg" label="Madagascar"/>
+<menuitem value="mwi" label="Malawi"/>
+<menuitem value="mys" label="Malaysia"/>
+<menuitem value="mdv" label="Maldives"/>
+<menuitem value="mli" label="Mali"/>
+<menuitem value="mlt" label="Malta"/>
+<menuitem value="mhl" label="Marshall Islands"/>
+<menuitem value="mtq" label="Martinique"/>
+<menuitem value="mrt" label="Mauritania"/>
+<menuitem value="mus" label="Mauritius"/>
+<menuitem value="myt" label="Mayotte"/>
+<menuitem value="mex" label="Mexico"/>
+<menuitem value="fsm" label="Micronesia, Federated States of"/>
+<menuitem value="mda" label="Moldova, Republic of"/>
+<menuitem value="mco" label="Monaco"/>
+<menuitem value="mng" label="Mongolia"/>
+<menuitem value="mne" label="Montenegro"/>
+<menuitem value="msr" label="Montserrat"/>
+<menuitem value="mar" label="Morocco"/>
+<menuitem value="moz" label="Mozambique"/>
+<menuitem value="mmr" label="Myanmar"/>
+<menuitem value="nam" label="Namibia"/>
+<menuitem value="nru" label="Nauru"/>
+<menuitem value="npl" label="Nepal"/>
+<menuitem value="nld" label="Netherlands"/>
+<menuitem value="ncl" label="New Caledonia"/>
+<menuitem value="nzl" label="New Zealand"/>
+<menuitem value="nic" label="Nicaragua"/>
+<menuitem value="ner" label="Niger"/>
+<menuitem value="nga" label="Nigeria"/>
+<menuitem value="niu" label="Niue"/>
+<menuitem value="nfk" label="Norfolk Island"/>
+<menuitem value="mnp" label="Northern Mariana Islands"/>
+<menuitem value="nor" label="Norway"/>
+<menuitem value="omn" label="Oman"/>
+<menuitem value="pak" label="Pakistan"/>
+<menuitem value="plw" label="Palau"/>
+<menuitem value="pse" label="Palestinian Territory, Occupied"/>
+<menuitem value="pan" label="Panama"/>
+<menuitem value="png" label="Papua New Guinea"/>
+<menuitem value="pry" label="Paraguay"/>
+<menuitem value="per" label="Peru"/>
+<menuitem value="phl" label="Philippines"/>
+<menuitem value="pcn" label="Pitcairn"/>
+<menuitem value="pol" label="Poland"/>
+<menuitem value="prt" label="Portugal"/>
+<menuitem value="pri" label="Puerto Rico"/>
+<menuitem value="qat" label="Qatar"/>
+<menuitem value="rou" label="Romania"/>
+<menuitem value="rus" label="Russian Federation"/>
+<menuitem value="rwa" label="Rwanda"/>
+<menuitem value="reu" label="Réunion"/>
+<menuitem value="blm" label="Saint Barthélemy"/>
+<menuitem value="shn" label="Saint Helena, Ascension and Tristan da Cunha"/>
+<menuitem value="kna" label="Saint Kitts and Nevis"/>
+<menuitem value="lca" label="Saint Lucia"/>
+<menuitem value="maf" label="Saint Martin (French part)"/>
+<menuitem value="spm" label="Saint Pierre and Miquelon"/>
+<menuitem value="vct" label="Saint Vincent and the Grenadines"/>
+<menuitem value="wsm" label="Samoa"/>
+<menuitem value="smr" label="San Marino"/>
+<menuitem value="stp" label="Sao Tome and Principe"/>
+<menuitem value="sau" label="Saudi Arabia"/>
+<menuitem value="sen" label="Senegal"/>
+<menuitem value="srb" label="Serbia"/>
+<menuitem value="syc" label="Seychelles"/>
+<menuitem value="sle" label="Sierra Leone"/>
+<menuitem value="sgp" label="Singapore"/>
+<menuitem value="sxm" label="Sint Maarten (Dutch part)"/>
+<menuitem value="svk" label="Slovakia"/>
+<menuitem value="svn" label="Slovenia"/>
+<menuitem value="slb" label="Solomon Islands"/>
+<menuitem value="som" label="Somalia"/>
+<menuitem value="zaf" label="South Africa"/>
+<menuitem value="sgs" label="South Georgia and the South Sandwich Islands"/>
+<menuitem value="ssd" label="South Sudan"/>
+<menuitem value="esp" label="Spain"/>
+<menuitem value="lka" label="Sri Lanka"/>
+<menuitem value="sdn" label="Sudan"/>
+<menuitem value="sur" label="Suriname"/>
+<menuitem value="sjm" label="Svalbard and Jan Mayen"/>
+<menuitem value="swz" label="Swaziland"/>
+<menuitem value="swe" label="Sweden"/>
+<menuitem value="che" label="Switzerland"/>
+<menuitem value="syr" label="Syrian Arab Republic"/>
+<menuitem value="twn" label="Taiwan, Province of China"/>
+<menuitem value="tjk" label="Tajikistan"/>
+<menuitem value="tza" label="Tanzania, United Republic of"/>
+<menuitem value="tha" label="Thailand"/>
+<menuitem value="tls" label="Timor-Leste"/>
+<menuitem value="tgo" label="Togo"/>
+<menuitem value="tkl" label="Tokelau"/>
+<menuitem value="ton" label="Tonga"/>
+<menuitem value="tto" label="Trinidad and Tobago"/>
+<menuitem value="tun" label="Tunisia"/>
+<menuitem value="tur" label="Turkey"/>
+<menuitem value="tkm" label="Turkmenistan"/>
+<menuitem value="tca" label="Turks and Caicos Islands"/>
+<menuitem value="tuv" label="Tuvalu"/>
+<menuitem value="uga" label="Uganda"/>
+<menuitem value="ukr" label="Ukraine"/>
+<menuitem value="are" label="United Arab Emirates"/>
+<menuitem value="gbr" label="United Kingdom"/>
+<menuitem value="usa" label="United States"/>
+<menuitem value="umi" label="United States Minor Outlying Islands"/>
+<menuitem value="ury" label="Uruguay"/>
+<menuitem value="uzb" label="Uzbekistan"/>
+<menuitem value="vut" label="Vanuatu"/>
+<menuitem value="ven" label="Venezuela, Bolivarian Republic of"/>
+<menuitem value="vnm" label="Viet Nam"/>
+<menuitem value="vgb" label="Virgin Islands, British"/>
+<menuitem value="vir" label="Virgin Islands, U.S."/>
+<menuitem value="wlf" label="Wallis and Futuna"/>
+<menuitem value="esh" label="Western Sahara"/>
+<menuitem value="yem" label="Yemen"/>
+<menuitem value="zmb" label="Zambia"/>
+<menuitem value="zwe" label="Zimbabwe"/>
+<menuitem value="ala" label="Åland Islands"/>
+
+    </menupopup>
+  </menulist>
+</setting>
+
+<setting 
+  type="string"
+	id="custom_namespaces"
+	pref="extensions.serchilo.custom_namespaces"
+  title="Custom namespaces"
+>
+
+	Optional. Add additional namespaces, seperated with ".". 
+</setting>
+
+<setting 
+  type="string"
+	id="user_name"
+	pref="extensions.serchilo.user_name"
+  title="Serchilo user name"
+>
+</setting>
+
+<setting 
+  type="string"
+	id="default_keyword"
+	pref="extensions.serchilo.default_keyword"
+  title="Default keyword"
+	>
+A default keyword will be used if no Serchilo command was found in your search query. Defaults to Google.
+</setting>
+
+<setting type="control" title="Save changes">
+	<button id="save" label="Save" />
+</setting>
+
+</box>
