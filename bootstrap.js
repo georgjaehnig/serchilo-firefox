@@ -3,15 +3,19 @@ const { classes: Cc, interfaces: Ci, utils: Cu, results: Cr } = Components;
 // Import the Services module.
 Cu.import("resource://gre/modules/Services.jsm");
 
-// These must be the same details as in your search.xml file.
 let engine_details = {
-    name: "Serchilo: de.deu",
-    url: "http://www.serchilo.net/n/de.deu?query=_searchTerms_"
+    name: 						'Serchilo: de.deu',
+    url: 							'http://www.serchilo.net/n/de.deu?query=_searchTerms_',
+		usage_type: 			'n',
+		namespace_path: 	'de.deu',
+		default_keyword: 	''
 };
 
-let engine_uri = 'data:text/xml;charset=utf-8,' + escape('<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/"> <ShortName>Serchilo: de.deu</ShortName> <Url xmlns:s="http://serchilo.net/opensearchextensions/1.0/" type="text/html" method="get" template="http://www.serchilo.net/n/de.deu?query={searchTerms}"/> <Url type="application/x-suggestions+json" template="http://www.serchilo.net/opensearch-suggestions/n/de.deu?source=firefox-addon&amp;query={searchTerms}"/> <Url type="application/opensearchdescription+xml" rel="self" template="http://www.serchilo.net/opensearch/n/de.deu"/> <Image width="16" height="16"> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </Image> <Contact>opensearch@serchilo.net</Contact> <moz:UpdateUrl>http://www.serchilo.net/opensearch/n/de.deu</moz:UpdateUrl> <moz:SearchForm>http://www.serchilo.net/n/de.deu</moz:SearchForm> <moz:IconUpdateUrl> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </moz:IconUpdateUrl> <moz:UpdateInterval>7</moz:UpdateInterval> <Query role="example" searchTerms="g berlin"/> <InputEncoding>utf-8</InputEncoding> <Tags/> </OpenSearchDescription>');
 
-//const engine_uri = "http://serchilo.net/opensearch/u/jorges";
+const ENGINE_XML_TEMPLATE = '<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/"> <ShortName>{name}</ShortName> <Url xmlns:s="http://serchilo.net/opensearchextensions/1.0/" type="text/html" method="get" template="http://www.serchilo.net/{usage_type}/{namespace_path}?source=firefox-addon&amp;query={searchTerms}&amp;{default_keyword_parameter}"/> <Url type="application/x-suggestions+json" template="http://www.serchilo.net/opensearch-suggestions/{usage_type}/{namespace_path}?source=firefox-addon&amp;query={searchTerms}"/> <Image width="16" height="16"> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </Image> <Contact>opensearch@serchilo.net</Contact> <moz:SearchForm>http://www.serchilo.net/{usage_type}/{namespace_path}</moz:SearchForm> <moz:IconUpdateUrl> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </moz:IconUpdateUrl> <moz:UpdateInterval>7</moz:UpdateInterval> <Query role="example" searchTerms="g berlin"/> <InputEncoding>utf-8</InputEncoding> <Tags/> </OpenSearchDescription>';
+
+
+//let engine_uri = 'data:text/xml;charset=utf-8,' + escape('<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/"> <ShortName>{name}</ShortName> <Url xmlns:s="http://serchilo.net/opensearchextensions/1.0/" type="text/html" method="get" template="http://www.serchilo.net/n/de.deu?query={searchTerms}"/> <Url type="application/x-suggestions+json" template="http://www.serchilo.net/opensearch-suggestions/n/de.deu?source=firefox-addon&amp;query={searchTerms}"/> <Url type="application/opensearchdescription+xml" rel="self" template="http://www.serchilo.net/opensearch/n/de.deu"/> <Image width="16" height="16"> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </Image> <Contact>opensearch@serchilo.net</Contact> <moz:UpdateUrl>http://www.serchilo.net/opensearch/n/de.deu</moz:UpdateUrl> <moz:SearchForm>http://www.serchilo.net/n/de.deu</moz:SearchForm> <moz:IconUpdateUrl> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </moz:IconUpdateUrl> <moz:UpdateInterval>7</moz:UpdateInterval> <Query role="example" searchTerms="g berlin"/> <InputEncoding>utf-8</InputEncoding> <Tags/> </OpenSearchDescription>');
 
 // Keep track of whether this is the first run.
 var firstRun = false;
@@ -49,7 +53,7 @@ const ENGINE_ADDED = "browser-search-engine-modified";
 
 function startup(data, reason) {
 
-	dump(unescape(engine_uri));
+	//dump(unescape(engine_uri));
 	//dump(unescape(engine_uri2));
 
     firstRun = reason == ADDON_INSTALL;
@@ -67,9 +71,25 @@ function startup(data, reason) {
         if (selectSearch)
             Services.obs.addObserver(searchObserver, ENGINE_ADDED, false);
 
+				let engine_xml = ENGINE_XML_TEMPLATE;
+				engine_xml = engine_xml.replace('{name}', engine_details.name);
+				engine_xml = engine_xml.replace('{usage_type}', engine_details.usage_type);
+				engine_xml = engine_xml.replace('{namespace_path}', engine_details.namespace_path);
+				engine_xml = engine_xml.replace('{default_keyword}', engine_details.default_keyword_parameter);
+
+				dump(engine_xml);
+				let engine_uri = wrap_xml_into_data_uri(engine_xml);
+
+				dump(engine_uri);
+
         Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
 				Services.search.currentEngine = engine;
     }
+}
+
+function wrap_xml_into_data_uri(xml) {
+	let uri = 'data:text/xml;charset=utf-8,' + escape(xml);
+	return uri;
 }
 
 function shutdown(data, reason) {
@@ -85,8 +105,8 @@ function shutdown(data, reason) {
 				dump('begin');
 				dump( engine.getSubmission("_searchTerms_").uri.spec);
 				dump('end');
-        if (engine && engine.getSubmission("_searchTerms_").uri.spec == engine_details.url)
-        //if (engine)
+        //if (engine && engine.getSubmission("_searchTerms_").uri.spec == engine_details.url)
+        if (engine)
             Services.search.removeEngine(engine);
     }
 }
