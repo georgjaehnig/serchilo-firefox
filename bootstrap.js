@@ -81,7 +81,6 @@ function startup(data, reason) {
 		let engine_uri = wrap_xml_into_data_uri(engine_xml);
 
 		Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
-		Services.search.currentEngine = engine;
   }
 }
 
