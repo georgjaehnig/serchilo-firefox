@@ -63,8 +63,9 @@ function startup(data, reason) {
 
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
-  if (engine)
+  if (engine) {
     searchObserver(engine, engine_details);
+	}
   else {
     // Register an observer to detect when the engine has been added, if
     // necessary.
