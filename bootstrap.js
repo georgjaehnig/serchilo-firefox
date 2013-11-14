@@ -68,8 +68,9 @@ function startup(data, reason) {
   else {
     // Register an observer to detect when the engine has been added, if
     // necessary.
-    if (selectSearch)
+    if (selectSearch) {
       Services.obs.addObserver(searchObserver, ENGINE_ADDED, false);
+		}
 
 		let engine_xml = ENGINE_XML_TEMPLATE;
 		engine_xml = engine_xml.replace('{name}', engine_details.name);
