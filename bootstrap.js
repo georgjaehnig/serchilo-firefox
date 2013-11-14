@@ -77,10 +77,7 @@ function startup(data, reason) {
 				engine_xml = engine_xml.replace('{namespace_path}', engine_details.namespace_path);
 				engine_xml = engine_xml.replace('{default_keyword}', engine_details.default_keyword_parameter);
 
-				dump(engine_xml);
 				let engine_uri = wrap_xml_into_data_uri(engine_xml);
-
-				dump(engine_uri);
 
         Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
 				Services.search.currentEngine = engine;
