@@ -3,9 +3,18 @@ const { classes: Cc, interfaces: Ci, utils: Cu, results: Cr } = Components;
 // Import the Services module.
 Cu.import("resource://gre/modules/Services.jsm");
 
+preferences = {
+  language_namespace: 'de',
+  country_namespace: 'deu',
+  custom_namespaces: '',
+  default_keyword: 'g',
+  user_name: ''
+}
+
 // defaults
 var language_namespace = 'de';
 var country_namespace = 'deu';
+var custom_namespaces = '';
 var default_keyword = 'g';
 var user_name = '';
 
@@ -34,6 +43,8 @@ var selectSearch = false;
 
 function startup(data, reason) {
 
+  setPreferences();
+
   Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
 
   firstRun = reason == ADDON_INSTALL;
@@ -58,7 +69,10 @@ function shutdown(data, reason) {
   }
 }
 
+
 function install() {
+
+  setPreferences();
 
   setLanguageAndCountryNamespaces();
 
@@ -68,13 +82,26 @@ function install() {
   if (!prefs.prefHasUserValue("extensions.serchilo.user_name")) {
     prefs.setCharPref("extensions.serchilo.language_namespace", language_namespace);
     prefs.setCharPref("extensions.serchilo.country_namespace",  country_namespace);
+    prefs.setCharPref("extensions.serchilo.custom_namespaces",  custom_namespaces);
     prefs.setCharPref("extensions.serchilo.default_keyword",    default_keyword);
     prefs.setCharPref("extensions.serchilo.user_name",          user_name);
   }
 }
+
 function uninstall() {}
 
 // HELPER FUNCTIONS ===============================================
+
+function setPreferences() {
+
+  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+
+  for (var key in preferences) {
+    if (!prefs.prefHasUserValue("extensions.serchilo." + key)) {
+      prefs.setCharPref("extensions.serchilo." + key, preferences[key]);
+    }
+  }
+}
 
 // Observers
 
@@ -162,8 +189,6 @@ function addSearchEngine() {
 
   let engine_details = getEngineDetailsFromPrefs();
 
-  dump(engine_details.usage_type);
-
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
   if (engine) {
@@ -191,7 +216,15 @@ function addSearchEngine() {
 
 function getEngineDetailsFromPrefs() {
 
+  language_namespace = Services.prefs.getCharPref('extensions.serchilo.language_namespace');
+  country_namespace = Services.prefs.getCharPref('extensions.serchilo.country_namespace');
+  //custom_namespaces = Services.prefs.getCharPref('extensions.serchilo.custom_namespaces');
+  default_keyword = Services.prefs.getCharPref('extensions.serchilo.default_keyword');
+  user_name = Services.prefs.getCharPref('extensions.serchilo.user_name');
+
   engine_details.usage_type = (user_name == '' ? 'n' : 'u');
+
+  dump(engine_details.usage_type);
 
   return engine_details;
 }
