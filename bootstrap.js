@@ -116,11 +116,8 @@ function optionObserver(subject, topic, data) {
   documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
   showAndHideOptions();
 
-  var saveButton = documentOptions.getElementById('save');
-  saveButton.addEventListener('command', updateSearchEngine);
-
-  var userNameSetting = documentOptions.getElementById('user_name');
-  userNameSetting.addEventListener('keyup', showAndHideOptions);
+  documentOptions.getElementById('save').addEventListener('command', updateSearchEngine);
+  documentOptions.getElementById('user_name').addEventListener('keyup', showAndHideOptions);
 
   documentOptions.getElementById('user_name').addEventListener('keyup', resetSaveButton);
   documentOptions.getElementById('custom_namespaces').addEventListener('keyup', resetSaveButton);
