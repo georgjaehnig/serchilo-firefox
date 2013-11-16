@@ -13,7 +13,6 @@ var documentOptions;
 const domain_path = 'http://www.serchilo.net/';
 let engine_details = {
   name:             'Serchilo: de.deu',
-  url:              'http://www.serchilo.net/n/de.deu?query=_searchTerms_',
   usage_type:       'n',
   namespace_path:   'de.deu',
   default_keyword:  '',
@@ -152,6 +151,8 @@ function removeSearchEngine() {
 }
 
 function updateSearchEngine() {
+  // When updating, (re-)select the engine
+  selectSearch = true;
 	removeSearchEngine();
 	addSearchEngine();
 	documentOptions.getElementById('save').label = 'Save - Success.';
