@@ -33,7 +33,7 @@ var selectSearch = false;
 
 // HELPER FUNCTIONS ===============================================
 
-function removeObserver() {
+function removeSearchObserver() {
   try {
     Services.obs.removeObserver(searchObserver, ENGINE_ADDED);
   }
@@ -49,7 +49,7 @@ function searchObserver(engine, topic, data) {
   engine.QueryInterface(Ci.nsISearchEngine);
   if (engine.name == engine_details.name) {
     // Remove our observer now that we're done with it.
-    removeObserver();
+    removeSearchObserver();
 
     // If the engine is not hidden and this is the first run, move
     // it to the first position in the engine list and select it
@@ -145,7 +145,7 @@ function shutdown(data, reason) {
 
   // Remove our observer, if necessary
   if (reason != APP_SHUTDOWN)
-    removeObserver();
+    removeSearchObserver();
 
   // Clean up the search engine on uninstall or disabled.
   if (reason == ADDON_UNINSTALL || reason == ADDON_DISABLE) {
