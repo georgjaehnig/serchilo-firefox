@@ -78,8 +78,8 @@ function optionObserver(subject, topic, data) {
   //saveButton.addEventListener('command', this.save);
   //saveButton.addEventListener('command', updateSearchEngine);
 
-  var typeSelect = documentOptions.getElementById('user_name');
-  typeSelect.addEventListener('keyup', showAndHideOptions);
+  var userNameSetting = documentOptions.getElementById('user_name');
+  userNameSetting.addEventListener('keyup', showAndHideOptions);
 
 }
 
