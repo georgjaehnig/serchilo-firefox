@@ -3,6 +3,14 @@ const { classes: Cc, interfaces: Ci, utils: Cu, results: Cr } = Components;
 // Import the Services module.
 Cu.import("resource://gre/modules/Services.jsm");
 
+var language_namespace = 'de';
+var country_namespace = 'deu';
+var default_keyword = 'g';
+var usage_type = 'n';
+var user_name = '';
+var documentOptions;
+
+const domain_path = 'http://www.serchilo.net/';
 let engine_details = {
   name:             'Serchilo: de.deu',
   url:              'http://www.serchilo.net/n/de.deu?query=_searchTerms_',
