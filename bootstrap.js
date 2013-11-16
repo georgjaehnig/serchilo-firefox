@@ -109,6 +109,15 @@ function showAndHideOptions() {
   }
 }
 
+function removeSearchEngine() {
+  let engine = Services.search.getEngineByName(engine_details.name);
+  // Only remove the engine if it appears to be the same one we
+  // added.
+  if (engine && engine.description == engine_details.description) {
+    Services.search.removeEngine(engine);
+  }
+}
+
 // CORE FUNCTIONS ===============================================
 
 function startup(data, reason) {
@@ -155,12 +164,7 @@ function shutdown(data, reason) {
 
   // Clean up the search engine on uninstall or disabled.
   if (reason == ADDON_UNINSTALL || reason == ADDON_DISABLE) {
-    let engine = Services.search.getEngineByName(engine_details.name);
-    // Only remove the engine if it appears to be the same one we
-    // added.
-    if (engine && engine.description == engine_details.description) {
-      Services.search.removeEngine(engine);
-    }
+    removeSearchEngine();
   }
 }
 
