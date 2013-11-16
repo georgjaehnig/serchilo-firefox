@@ -33,13 +33,7 @@ var selectSearch = false;
 
 // HELPER FUNCTIONS ===============================================
 
-function removeSearchObserver() {
-  try {
-    Services.obs.removeObserver(searchObserver, ENGINE_ADDED);
-  }
-  // If we've already removed this observer, ignore the error.
-  catch (e) {}
-}
+// Observers
 
 // Observer called after our engine has been successfully added
 function searchObserver(engine, topic, data) {
@@ -60,11 +54,6 @@ function searchObserver(engine, topic, data) {
   }
 }
 
-function wrap_xml_into_data_uri(xml) {
-  let uri = 'data:text/xml;charset=utf-8,' + encodeURI(xml);
-  return uri;
-}
-
 function optionObserver(subject, topic, data) {
 
   if (topic != "addon-options-displayed") {
@@ -83,11 +72,28 @@ function optionObserver(subject, topic, data) {
 
 }
 
+// Observer removers
+
+function removeSearchObserver() {
+  try {
+    Services.obs.removeObserver(searchObserver, ENGINE_ADDED);
+  }
+  // If we've already removed this observer, ignore the error.
+  catch (e) {}
+}
+
 function removeOptionObserver() {
   try {
     Services.obs.removeObserver(optionObserver, 'addon-options-displayed');
   }
   catch (e) {}
+}
+
+// General helpers
+
+function wrap_xml_into_data_uri(xml) {
+  let uri = 'data:text/xml;charset=utf-8,' + encodeURI(xml);
+  return uri;
 }
 
 
@@ -109,6 +115,7 @@ function showAndHideOptions() {
   }
 }
 
+// search engine add & removal
 function addSearchEngine(selectSearch) {
 
   // Only add the engine if it doesn't already exist.
