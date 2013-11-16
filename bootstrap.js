@@ -64,8 +64,7 @@ function optionObserver(subject, topic, data) {
   showAndHideOptions();
 
   var saveButton = documentOptions.getElementById('save');
-  //saveButton.addEventListener('command', this.save);
-  //saveButton.addEventListener('command', updateSearchEngine);
+  saveButton.addEventListener('command', updateSearchEngine);
 
   var userNameSetting = documentOptions.getElementById('user_name');
   userNameSetting.addEventListener('keyup', showAndHideOptions);
@@ -116,7 +115,7 @@ function showAndHideOptions() {
 }
 
 // search engine add & removal
-function addSearchEngine(selectSearch) {
+function addSearchEngine() {
 
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
@@ -152,6 +151,12 @@ function removeSearchEngine() {
   }
 }
 
+function updateSearchEngine() {
+	removeSearchEngine();
+	addSearchEngine();
+	documentOptions.getElementById('save').label = 'Save - Success.';
+}
+
 // CORE FUNCTIONS ===============================================
 
 function startup(data, reason) {
@@ -163,7 +168,7 @@ function startup(data, reason) {
   // or we're being re-enabled.
   selectSearch = firstRun || reason == ADDON_ENABLE;
 
-  addSearchEngine(selectSearch);
+  addSearchEngine();
 }
 
 function shutdown(data, reason) {
