@@ -21,10 +21,6 @@ var user_name = '';
 var documentOptions;
 
 var engine_details = {
-  name:             'Serchilo: de.deu',
-  usage_type:       'n',
-  namespace_path:   'de.deu',
-  default_keyword:  '',
   description:      'Serchilo.net, added by Firefox addon'
 };
 
@@ -184,9 +180,6 @@ function addSearchEngine() {
   updatePreferencesFromBrowser();
   updateEngineDetailsFromPreferences();
 
-  dump( engine_details.name);
-  dump( engine_details.namespace_path );
-
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
   if (engine) {
@@ -227,7 +220,7 @@ function updateEngineDetailsFromPreferences() {
       engine_details.name += ' | ' + default_keyword;
     }
     break; 
-  case 'n':
+  case 'u':
     engine_details.namespace_path = preferences.user_name;
     engine_details.name = 'Serchilo: ' + preferences.user_name;
     break; 
