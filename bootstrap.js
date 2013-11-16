@@ -43,9 +43,6 @@ var selectSearch = false;
 
 function startup(data, reason) {
 
-  setSystemLanguageAndCountryToPreferences();
-  setPreferencesInBrowser();
-
   Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
 
   firstRun = reason == ADDON_INSTALL;
@@ -72,22 +69,8 @@ function shutdown(data, reason) {
 
 
 function install() {
-
+  setSystemLanguageAndCountryToPreferences();
   setPreferencesInBrowser();
-
-  return;
-  setLanguageAndCountryNamespaces();
-
-  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-
-  // set default prefs if no prefs set yet
-  if (!prefs.prefHasUserValue("extensions.serchilo.user_name")) {
-    prefs.setCharPref("extensions.serchilo.language_namespace", language_namespace);
-    prefs.setCharPref("extensions.serchilo.country_namespace",  country_namespace);
-    prefs.setCharPref("extensions.serchilo.custom_namespaces",  custom_namespaces);
-    prefs.setCharPref("extensions.serchilo.default_keyword",    default_keyword);
-    prefs.setCharPref("extensions.serchilo.user_name",          user_name);
-  }
 }
 
 function uninstall() {}
