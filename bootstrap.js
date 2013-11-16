@@ -80,30 +80,26 @@ function optionObserver(subject, topic, data) {
   //saveButton.addEventListener('command', this.save);
   //saveButton.addEventListener('command', updateSearchEngine);
 
-  var typeSelect = documentOptions.getElementById('usage_type');
-  typeSelect.addEventListener('command', showAndHideOptions);
+  var typeSelect = documentOptions.getElementById('user_name');
+  typeSelect.addEventListener('keyup', showAndHideOptions);
 
 }
 
 function showAndHideOptions() {
 
-  usage_type = Services.prefs.getCharPref('extensions.serchilo.usage_type');
+  user_name = Services.prefs.getCharPref('extensions.serchilo.user_name');
 
-  switch (usage_type) {
-  case 'n':
-    documentOptions.getElementById('user_name').collapsed = true;
+  if (user_name == '') {
     documentOptions.getElementById('language_namespace').collapsed = false;
     documentOptions.getElementById('country_namespace').collapsed = false;
     documentOptions.getElementById('custom_namespaces').collapsed = false;
     documentOptions.getElementById('default_keyword').collapsed = false;
-    break;
-  case 'u':
-    documentOptions.getElementById('user_name').collapsed = false;
+  }
+  else {
     documentOptions.getElementById('language_namespace').collapsed = true;
     documentOptions.getElementById('country_namespace').collapsed = true;
     documentOptions.getElementById('custom_namespaces').collapsed = true;
     documentOptions.getElementById('default_keyword').collapsed = true;
-    break;
   }
 }
 

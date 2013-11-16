@@ -5,15 +5,6 @@
 	
 	>
 
-	<setting id="usage_type" pref="extensions.serchilo.usage_type" type="menulist" title="Use Serchilo">
-  <menulist>
-    <menupopup>
-      <menuitem value="n" label="without a user account"/>
-      <menuitem value="u" label="with a user account"/>
-    </menupopup>
-  </menulist>
-</setting>
-
 <setting 
   type="string"
 	id="user_name"
