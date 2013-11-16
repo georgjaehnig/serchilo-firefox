@@ -122,6 +122,12 @@ function optionObserver(subject, topic, data) {
   var userNameSetting = documentOptions.getElementById('user_name');
   userNameSetting.addEventListener('keyup', showAndHideOptions);
 
+  documentOptions.getElementById('user_name').addEventListener('keyup', resetSaveButton);
+  documentOptions.getElementById('custom_namespaces').addEventListener('keyup', resetSaveButton);
+  documentOptions.getElementById('default_keyword').addEventListener('keyup', resetSaveButton);
+  documentOptions.getElementById('language_namespace').addEventListener('command', resetSaveButton);
+  documentOptions.getElementById('country_namespace').addEventListener('command', resetSaveButton);
+
 }
 
 // Observer removers
@@ -234,7 +240,11 @@ function updateSearchEngine() {
   selectSearch = true;
   removeSearchEngine();
   addSearchEngine();
-  documentOptions.getElementById('save').label = 'Save - Success.';
+  documentOptions.getElementById('save').label = 'Saved.';
+}
+
+function resetSaveButton() {
+  documentOptions.getElementById('save').label = 'Save';
 }
 
 function setSystemLanguageAndCountryToPreferences() {
