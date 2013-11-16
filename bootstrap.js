@@ -3,11 +3,13 @@ const { classes: Cc, interfaces: Ci, utils: Cu, results: Cr } = Components;
 // Import the Services module.
 Cu.import("resource://gre/modules/Services.jsm");
 
+// defaults
 var language_namespace = 'de';
 var country_namespace = 'deu';
 var default_keyword = 'g';
 var usage_type = 'n';
 var user_name = '';
+
 var documentOptions;
 
 const domain_path = 'http://www.serchilo.net/';
@@ -153,9 +155,37 @@ function removeSearchEngine() {
 function updateSearchEngine() {
   // When updating, (re-)select the engine
   selectSearch = true;
-	removeSearchEngine();
-	addSearchEngine();
-	documentOptions.getElementById('save').label = 'Save - Success.';
+  removeSearchEngine();
+  addSearchEngine();
+  documentOptions.getElementById('save').label = 'Save - Success.';
+}
+
+function setLanguageAndCountryNamespaces() {
+
+  var languageAndCountry = Services.locale.getLocaleComponentForUserAgent() || '';
+  //var languageAndCountry = 'en';
+
+  if (languageAndCountry != '') {
+    languageAndCountry = languageAndCountry.split('-');
+
+    // add language_namespace
+    if (languageAndCountry[0].length == 2) {
+      language_namespace = languageAndCountry[0];
+      language_namespace = language_namespace.toLowerCase();
+    }
+
+    // add country_namespace
+    if (languageAndCountry.length > 1) {
+      var country_namespace_2letter = languageAndCountry[1];
+      var country_namespace_3letter = serchilo_2letter_to_3letter_country_code(country_namespace_2letter); 
+      if (country_namespace_3letter) {
+        country_namespace = country_namespace_3letter.toLowerCase();
+      }
+    }
+  }
+
+  //dump(language_namespace);
+  //dump(country_namespace);
 }
 
 // CORE FUNCTIONS ===============================================
@@ -186,5 +216,18 @@ function shutdown(data, reason) {
   }
 }
 
-function install() {}
+function install() {
+
+  setLanguageAndCountryNamespaces();
+
+  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+
+  // set default prefs if no prefs set yet
+  if (!prefs.prefHasUserValue("extensions.serchilo.user_name")) {
+    prefs.setCharPref("extensions.serchilo.language_namespace", language_namespace);
+    prefs.setCharPref("extensions.serchilo.country_namespace",  country_namespace);
+    prefs.setCharPref("extensions.serchilo.default_keyword",    default_keyword);
+    prefs.setCharPref("extensions.serchilo.user_name",          user_name);
+  }
+}
 function uninstall() {}
