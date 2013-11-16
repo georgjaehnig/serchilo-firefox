@@ -16,8 +16,6 @@ let engine_details = {
 const ENGINE_XML_TEMPLATE = '<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/"> <ShortName>{name}</ShortName> <Description>{description}</Description> <Url xmlns:s="http://serchilo.net/opensearchextensions/1.0/" type="text/html" method="get" template="http://www.serchilo.net/{usage_type}/{namespace_path}?source=firefox-addon&amp;query={searchTerms}&amp;{default_keyword_parameter}"/> <Url type="application/x-suggestions+json" template="http://www.serchilo.net/opensearch-suggestions/{usage_type}/{namespace_path}?source=firefox-addon&amp;query={searchTerms}"/> <Image width="16" height="16"> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </Image> <Contact>opensearch@serchilo.net</Contact> <moz:SearchForm>http://www.serchilo.net/{usage_type}/{namespace_path}</moz:SearchForm> <moz:IconUpdateUrl> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </moz:IconUpdateUrl> <moz:UpdateInterval>7</moz:UpdateInterval> <Query role="example" searchTerms="g berlin"/> <InputEncoding>utf-8</InputEncoding> <Tags/> </OpenSearchDescription>';
 
 
-//let engine_uri = 'data:text/xml;charset=utf-8,' + escape('<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/"> <ShortName>{name}</ShortName> <Url xmlns:s="http://serchilo.net/opensearchextensions/1.0/" type="text/html" method="get" template="http://www.serchilo.net/n/de.deu?query={searchTerms}"/> <Url type="application/x-suggestions+json" template="http://www.serchilo.net/opensearch-suggestions/n/de.deu?source=firefox-addon&amp;query={searchTerms}"/> <Url type="application/opensearchdescription+xml" rel="self" template="http://www.serchilo.net/opensearch/n/de.deu"/> <Image width="16" height="16"> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </Image> <Contact>opensearch@serchilo.net</Contact> <moz:UpdateUrl>http://www.serchilo.net/opensearch/n/de.deu</moz:UpdateUrl> <moz:SearchForm>http://www.serchilo.net/n/de.deu</moz:SearchForm> <moz:IconUpdateUrl> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </moz:IconUpdateUrl> <moz:UpdateInterval>7</moz:UpdateInterval> <Query role="example" searchTerms="g berlin"/> <InputEncoding>utf-8</InputEncoding> <Tags/> </OpenSearchDescription>');
-
 // Keep track of whether this is the first run.
 var firstRun = false;
 // Decide whether to select the search engine.
@@ -53,9 +51,6 @@ function searchObserver(engine, topic, data) {
 const ENGINE_ADDED = "browser-search-engine-modified";
 
 function startup(data, reason) {
-
-  //dump(unescape(engine_uri));
-  //dump(unescape(engine_uri2));
 
   firstRun = reason == ADDON_INSTALL;
   // Re-select the search engine if this is the first run
