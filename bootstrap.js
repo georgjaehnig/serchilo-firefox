@@ -3,9 +3,9 @@ const { classes: Cc, interfaces: Ci, utils: Cu, results: Cr } = Components;
 // Import the Services module.
 Cu.import("resource://gre/modules/Services.jsm");
 
-preferences = {
-  language_namespace: 'de',
-  country_namespace: 'deu',
+var preferences = {
+  language_namespace: 'cs',
+  country_namespace: 'esp',
   custom_namespaces: '',
   default_keyword: 'g',
   user_name: ''
@@ -43,7 +43,8 @@ var selectSearch = false;
 
 function startup(data, reason) {
 
-  setPreferences();
+  setSystemLanguageAndCountryToPreferences();
+  setPreferencesInBrowser();
 
   Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
 
@@ -72,8 +73,9 @@ function shutdown(data, reason) {
 
 function install() {
 
-  setPreferences();
+  setPreferencesInBrowser();
 
+  return;
   setLanguageAndCountryNamespaces();
 
   var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
@@ -92,7 +94,7 @@ function uninstall() {}
 
 // HELPER FUNCTIONS ===============================================
 
-function setPreferences() {
+function setPreferencesInBrowser() {
 
   var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
 
@@ -224,8 +226,6 @@ function getEngineDetailsFromPrefs() {
 
   engine_details.usage_type = (user_name == '' ? 'n' : 'u');
 
-  dump(engine_details.usage_type);
-
   return engine_details;
 }
 
@@ -246,7 +246,7 @@ function updateSearchEngine() {
   documentOptions.getElementById('save').label = 'Save - Success.';
 }
 
-function setLanguageAndCountryNamespaces() {
+function setSystemLanguageAndCountryToPreferences() {
 
   var languageAndCountry = Services.locale.getLocaleComponentForUserAgent() || '';
   //var languageAndCountry = 'en';
@@ -256,8 +256,7 @@ function setLanguageAndCountryNamespaces() {
 
     // add language_namespace
     if (languageAndCountry[0].length == 2) {
-      language_namespace = languageAndCountry[0];
-      language_namespace = language_namespace.toLowerCase();
+      preferences.language_namespace = languageAndCountry[0].toLowerCase();
     }
 
     // add country_namespace
@@ -265,20 +264,19 @@ function setLanguageAndCountryNamespaces() {
       var country_namespace_2letter = languageAndCountry[1];
       var country_namespace_3letter = serchilo_2letter_to_3letter_country_code(country_namespace_2letter); 
       if (country_namespace_3letter) {
-        country_namespace = country_namespace_3letter.toLowerCase();
+        preferences.country_namespace = country_namespace_3letter.toLowerCase();
       }
     }
   }
 
-  //dump(language_namespace);
-  //dump(country_namespace);
+  return preferences;
 }
 
 
 
 function serchilo_2letter_to_3letter_country_code( letter2 ) {
 
-  country_codes = {
+  let country_codes = {
     'AF' : 'AFG',
     'AL' : 'ALB',
     'DZ' : 'DZA',
