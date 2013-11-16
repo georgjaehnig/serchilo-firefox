@@ -88,6 +88,15 @@ function setPreferencesInBrowser() {
   }
 }
 
+function updatePreferencesFromBrowser() {
+  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+  for (var key in preferences) {
+    if (prefs.prefHasUserValue("extensions.serchilo." + key)) {
+      preferences[key] = prefs.getCharPref("extensions.serchilo." + key);
+    }
+  }
+}
+
 // Observers
 
 // Observer called after our engine has been successfully added
@@ -172,7 +181,11 @@ function showAndHideOptions() {
 // search engine add & removal
 function addSearchEngine() {
 
-  let engine_details = getEngineDetailsFromPrefs();
+  updatePreferencesFromBrowser();
+  updateEngineDetailsFromPreferences();
+
+  dump( engine_details.name);
+  dump( engine_details.namespace_path );
 
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
@@ -188,10 +201,11 @@ function addSearchEngine() {
 
     let engine_xml = ENGINE_XML_TEMPLATE;
     engine_xml = engine_xml.replace('{name}', engine_details.name);
+    engine_xml = engine_xml.replace('{description}', engine_details.description);
     engine_xml = engine_xml.replace('{usage_type}', engine_details.usage_type);
     engine_xml = engine_xml.replace('{namespace_path}', engine_details.namespace_path);
-    engine_xml = engine_xml.replace('{default_keyword}', engine_details.default_keyword);
-    engine_xml = engine_xml.replace('{description}', engine_details.description);
+
+    engine_xml = engine_xml.replace('{default_keyword}', preferences.default_keyword);
 
     let engine_uri = wrap_xml_into_data_uri(engine_xml);
 
@@ -199,17 +213,21 @@ function addSearchEngine() {
   }
 }
 
-function getEngineDetailsFromPrefs() {
+function updateEngineDetailsFromPreferences() {
 
-  language_namespace = Services.prefs.getCharPref('extensions.serchilo.language_namespace');
-  country_namespace = Services.prefs.getCharPref('extensions.serchilo.country_namespace');
-  //custom_namespaces = Services.prefs.getCharPref('extensions.serchilo.custom_namespaces');
-  default_keyword = Services.prefs.getCharPref('extensions.serchilo.default_keyword');
-  user_name = Services.prefs.getCharPref('extensions.serchilo.user_name');
-
-  engine_details.usage_type = (user_name == '' ? 'n' : 'u');
-
-  return engine_details;
+  engine_details.usage_type = (preferences.user_name == '' ? 'n' : 'u');
+	switch (engine_details.usage_type) {
+  case 'n':
+    engine_details.namespace_path = preferences.language_namespace + '.' + preferences.country_namespace;
+    if (preferences.custom_namespaces != '') {
+      engine_details.namespace_path += '.' + preferences.custom_namespaces;
+    }
+    engine_details.name = 'Serchilo: ' + engine_details.namespace_path;
+    if (preferences.default_keyword != '') {
+      engine_details.name += ' | ' + default_keyword;
+    }
+    break; 
+  }
 }
 
 function removeSearchEngine() {
