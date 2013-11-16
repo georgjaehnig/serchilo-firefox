@@ -32,6 +32,51 @@ var firstRun = false;
 // Decide whether to select the search engine.
 var selectSearch = false;
 
+
+// CORE FUNCTIONS ===============================================
+
+function startup(data, reason) {
+
+  Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
+
+  firstRun = reason == ADDON_INSTALL;
+  // Re-select the search engine if this is the first run
+  // or we're being re-enabled.
+  selectSearch = firstRun || reason == ADDON_ENABLE;
+
+  addSearchEngine();
+}
+
+function shutdown(data, reason) {
+
+  removeOptionObserver();
+
+  if (reason != APP_SHUTDOWN) {
+    removeSearchObserver();
+  }
+
+  // Clean up the search engine on uninstall or disabled.
+  if (reason == ADDON_UNINSTALL || reason == ADDON_DISABLE) {
+    removeSearchEngine();
+  }
+}
+
+function install() {
+
+  setLanguageAndCountryNamespaces();
+
+  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+
+  // set default prefs if no prefs set yet
+  if (!prefs.prefHasUserValue("extensions.serchilo.user_name")) {
+    prefs.setCharPref("extensions.serchilo.language_namespace", language_namespace);
+    prefs.setCharPref("extensions.serchilo.country_namespace",  country_namespace);
+    prefs.setCharPref("extensions.serchilo.default_keyword",    default_keyword);
+    prefs.setCharPref("extensions.serchilo.user_name",          user_name);
+  }
+}
+function uninstall() {}
+
 // HELPER FUNCTIONS ===============================================
 
 // Observers
@@ -188,49 +233,6 @@ function setLanguageAndCountryNamespaces() {
   //dump(country_namespace);
 }
 
-// CORE FUNCTIONS ===============================================
-
-function startup(data, reason) {
-
-  Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
-
-  firstRun = reason == ADDON_INSTALL;
-  // Re-select the search engine if this is the first run
-  // or we're being re-enabled.
-  selectSearch = firstRun || reason == ADDON_ENABLE;
-
-  addSearchEngine();
-}
-
-function shutdown(data, reason) {
-
-  removeOptionObserver();
-
-  if (reason != APP_SHUTDOWN) {
-    removeSearchObserver();
-  }
-
-  // Clean up the search engine on uninstall or disabled.
-  if (reason == ADDON_UNINSTALL || reason == ADDON_DISABLE) {
-    removeSearchEngine();
-  }
-}
-
-function install() {
-
-  setLanguageAndCountryNamespaces();
-
-  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-
-  // set default prefs if no prefs set yet
-  if (!prefs.prefHasUserValue("extensions.serchilo.user_name")) {
-    prefs.setCharPref("extensions.serchilo.language_namespace", language_namespace);
-    prefs.setCharPref("extensions.serchilo.country_namespace",  country_namespace);
-    prefs.setCharPref("extensions.serchilo.default_keyword",    default_keyword);
-    prefs.setCharPref("extensions.serchilo.user_name",          user_name);
-  }
-}
-function uninstall() {}
 
 
 function serchilo_2letter_to_3letter_country_code( letter2 ) {
