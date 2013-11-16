@@ -6,10 +6,10 @@ Cu.import("resource://gre/modules/Services.jsm");
 let engine_details = {
   name:             'Serchilo: de.deu',
   url:              'http://www.serchilo.net/n/de.deu?query=_searchTerms_',
-	usage_type:       'n',
-	namespace_path:   'de.deu',
-	default_keyword:  '',
-	description:			'Serchilo.net, added by Firefox addon'
+  usage_type:       'n',
+  namespace_path:   'de.deu',
+  default_keyword:  '',
+  description:      'Serchilo.net, added by Firefox addon'
 };
 
 
@@ -65,43 +65,43 @@ function optionObserver(subject, topic, data) {
     return;
   }
 
-	documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
-	showAndHideOptions();
+  documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
+  showAndHideOptions();
 
-	var saveButton = documentOptions.getElementById('save');
-	//saveButton.addEventListener('command', this.save);
-	//saveButton.addEventListener('command', updateSearchEngine);
+  var saveButton = documentOptions.getElementById('save');
+  //saveButton.addEventListener('command', this.save);
+  //saveButton.addEventListener('command', updateSearchEngine);
 
-	var typeSelect = documentOptions.getElementById('usage_type');
-	typeSelect.addEventListener('command', showAndHideOptions);
+  var typeSelect = documentOptions.getElementById('usage_type');
+  typeSelect.addEventListener('command', showAndHideOptions);
 
 }
 
 function showAndHideOptions() {
 
-	usage_type = Services.prefs.getCharPref('extensions.serchilo.usage_type');
+  usage_type = Services.prefs.getCharPref('extensions.serchilo.usage_type');
 
-	switch (usage_type) {
-	case 'n':
-		documentOptions.getElementById('user_name').collapsed = true;
-		documentOptions.getElementById('language_namespace').collapsed = false;
-		documentOptions.getElementById('country_namespace').collapsed = false;
-		documentOptions.getElementById('custom_namespaces').collapsed = false;
-		documentOptions.getElementById('default_keyword').collapsed = false;
-		break;
-	case 'u':
-		documentOptions.getElementById('user_name').collapsed = false;
-		documentOptions.getElementById('language_namespace').collapsed = true;
-		documentOptions.getElementById('country_namespace').collapsed = true;
-		documentOptions.getElementById('custom_namespaces').collapsed = true;
-		documentOptions.getElementById('default_keyword').collapsed = true;
-		break;
-	}
+  switch (usage_type) {
+  case 'n':
+    documentOptions.getElementById('user_name').collapsed = true;
+    documentOptions.getElementById('language_namespace').collapsed = false;
+    documentOptions.getElementById('country_namespace').collapsed = false;
+    documentOptions.getElementById('custom_namespaces').collapsed = false;
+    documentOptions.getElementById('default_keyword').collapsed = false;
+    break;
+  case 'u':
+    documentOptions.getElementById('user_name').collapsed = false;
+    documentOptions.getElementById('language_namespace').collapsed = true;
+    documentOptions.getElementById('country_namespace').collapsed = true;
+    documentOptions.getElementById('custom_namespaces').collapsed = true;
+    documentOptions.getElementById('default_keyword').collapsed = true;
+    break;
+  }
 }
 
 function startup(data, reason) {
 
-	Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
+  Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
 
   firstRun = reason == ADDON_INSTALL;
   // Re-select the search engine if this is the first run
@@ -112,24 +112,24 @@ function startup(data, reason) {
   let engine = Services.search.getEngineByName(engine_details.name);
   if (engine) {
     searchObserver(engine, engine_details);
-	}
+  }
   else {
     // Register an observer to detect when the engine has been added, if
     // necessary.
     if (selectSearch) {
       Services.obs.addObserver(searchObserver, ENGINE_ADDED, false);
-		}
+    }
 
-		let engine_xml = ENGINE_XML_TEMPLATE;
-		engine_xml = engine_xml.replace('{name}', engine_details.name);
-		engine_xml = engine_xml.replace('{usage_type}', engine_details.usage_type);
-		engine_xml = engine_xml.replace('{namespace_path}', engine_details.namespace_path);
-		engine_xml = engine_xml.replace('{default_keyword}', engine_details.default_keyword);
-		engine_xml = engine_xml.replace('{description}', engine_details.description);
+    let engine_xml = ENGINE_XML_TEMPLATE;
+    engine_xml = engine_xml.replace('{name}', engine_details.name);
+    engine_xml = engine_xml.replace('{usage_type}', engine_details.usage_type);
+    engine_xml = engine_xml.replace('{namespace_path}', engine_details.namespace_path);
+    engine_xml = engine_xml.replace('{default_keyword}', engine_details.default_keyword);
+    engine_xml = engine_xml.replace('{description}', engine_details.description);
 
-		let engine_uri = wrap_xml_into_data_uri(engine_xml);
+    let engine_uri = wrap_xml_into_data_uri(engine_xml);
 
-		Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
+    Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
   }
 }
 
@@ -150,7 +150,7 @@ function shutdown(data, reason) {
     // added.
     if (engine && engine.description == engine_details.description) {
       Services.search.removeEngine(engine);
-		}
+    }
   }
 }
 
