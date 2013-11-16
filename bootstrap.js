@@ -53,7 +53,7 @@ function searchObserver(engine, topic, data) {
 }
 
 function wrap_xml_into_data_uri(xml) {
-  let uri = 'data:text/xml;charset=utf-8,' + escape(xml);
+  let uri = 'data:text/xml;charset=utf-8,' + encodeURI(xml);
   return uri;
 }
 
