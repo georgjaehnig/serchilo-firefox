@@ -119,9 +119,10 @@ function optionObserver(subject, topic, data) {
   //documentOptions.getElementById('save').addEventListener('command', updateSearchEngine);
   documentOptions.getElementById('user_name').addEventListener('keyup', showAndHideOptions);
 
-  documentOptions.getElementById('user_name').addEventListener('keyup', updateSearchEngine);
-  documentOptions.getElementById('custom_namespaces').addEventListener('keyup', updateSearchEngine);
-  documentOptions.getElementById('default_keyword').addEventListener('keyup', updateSearchEngine);
+  documentOptions.getElementById('user_name').addEventListener('change', updateSearchEngine);
+  documentOptions.getElementById('custom_namespaces').addEventListener('change', updateSearchEngine);
+  documentOptions.getElementById('default_keyword').addEventListener('change', updateSearchEngine);
+
   documentOptions.getElementById('language_namespace').addEventListener('command', updateSearchEngine);
   documentOptions.getElementById('country_namespace').addEventListener('command', updateSearchEngine);
 
@@ -269,8 +270,6 @@ function setSystemLanguageAndCountryToPreferences() {
 
   return preferences;
 }
-
-
 
 function serchilo_2letter_to_3letter_country_code( letter2 ) {
 
