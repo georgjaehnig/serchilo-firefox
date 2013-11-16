@@ -116,7 +116,6 @@ function optionObserver(subject, topic, data) {
   documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
   showAndHideOptions();
 
-  //documentOptions.getElementById('save').addEventListener('command', updateSearchEngine);
   documentOptions.getElementById('user_name').addEventListener('keyup', showAndHideOptions);
 
   documentOptions.getElementById('user_name').addEventListener('change', updateSearchEngine);
@@ -238,11 +237,6 @@ function updateSearchEngine() {
   selectSearch = true;
   removeSearchEngine();
   addSearchEngine();
-  //documentOptions.getElementById('save').label = 'Saved.';
-}
-
-function resetSaveButton() {
-  //documentOptions.getElementById('save').label = 'Save';
 }
 
 function setSystemLanguageAndCountryToPreferences() {
