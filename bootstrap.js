@@ -109,25 +109,7 @@ function showAndHideOptions() {
   }
 }
 
-function removeSearchEngine() {
-  let engine = Services.search.getEngineByName(engine_details.name);
-  // Only remove the engine if it appears to be the same one we
-  // added.
-  if (engine && engine.description == engine_details.description) {
-    Services.search.removeEngine(engine);
-  }
-}
-
-// CORE FUNCTIONS ===============================================
-
-function startup(data, reason) {
-
-  Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
-
-  firstRun = reason == ADDON_INSTALL;
-  // Re-select the search engine if this is the first run
-  // or we're being re-enabled.
-  selectSearch = firstRun || reason == ADDON_ENABLE;
+function addSearchEngine(selectSearch) {
 
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
@@ -152,6 +134,29 @@ function startup(data, reason) {
 
     Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
   }
+}
+
+function removeSearchEngine() {
+  let engine = Services.search.getEngineByName(engine_details.name);
+  // Only remove the engine if it appears to be the same one we
+  // added.
+  if (engine && engine.description == engine_details.description) {
+    Services.search.removeEngine(engine);
+  }
+}
+
+// CORE FUNCTIONS ===============================================
+
+function startup(data, reason) {
+
+  Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
+
+  firstRun = reason == ADDON_INSTALL;
+  // Re-select the search engine if this is the first run
+  // or we're being re-enabled.
+  selectSearch = firstRun || reason == ADDON_ENABLE;
+
+  addSearchEngine(selectSearch);
 }
 
 function shutdown(data, reason) {
