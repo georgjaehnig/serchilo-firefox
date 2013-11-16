@@ -148,8 +148,10 @@ function startup(data, reason) {
 function shutdown(data, reason) {
 
   removeOptionObserver();
-  if (reason != APP_SHUTDOWN)
+
+  if (reason != APP_SHUTDOWN) {
     removeSearchObserver();
+  }
 
   // Clean up the search engine on uninstall or disabled.
   if (reason == ADDON_UNINSTALL || reason == ADDON_DISABLE) {
