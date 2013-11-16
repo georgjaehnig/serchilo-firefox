@@ -490,8 +490,4 @@ Optional and only if no user name provided.
 A default keyword will be used if no Serchilo command was found in your search query. Defaults to Google.
 </setting>
 
-<setting type="control" title="Save changes">
-	<button id="save" label="Save" />
-</setting>
-
 </box>

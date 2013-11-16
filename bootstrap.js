@@ -4,8 +4,8 @@ const { classes: Cc, interfaces: Ci, utils: Cu, results: Cr } = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 
 var preferences = {
-  language_namespace: 'cs',
-  country_namespace: 'esp',
+  language_namespace: 'de',
+  country_namespace: 'deu',
   custom_namespaces: '',
   default_keyword: 'g',
   user_name: ''
@@ -116,14 +116,14 @@ function optionObserver(subject, topic, data) {
   documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
   showAndHideOptions();
 
-  documentOptions.getElementById('save').addEventListener('command', updateSearchEngine);
+  //documentOptions.getElementById('save').addEventListener('command', updateSearchEngine);
   documentOptions.getElementById('user_name').addEventListener('keyup', showAndHideOptions);
 
-  documentOptions.getElementById('user_name').addEventListener('keyup', resetSaveButton);
-  documentOptions.getElementById('custom_namespaces').addEventListener('keyup', resetSaveButton);
-  documentOptions.getElementById('default_keyword').addEventListener('keyup', resetSaveButton);
-  documentOptions.getElementById('language_namespace').addEventListener('command', resetSaveButton);
-  documentOptions.getElementById('country_namespace').addEventListener('command', resetSaveButton);
+  documentOptions.getElementById('user_name').addEventListener('keyup', updateSearchEngine);
+  documentOptions.getElementById('custom_namespaces').addEventListener('keyup', updateSearchEngine);
+  documentOptions.getElementById('default_keyword').addEventListener('keyup', updateSearchEngine);
+  documentOptions.getElementById('language_namespace').addEventListener('command', updateSearchEngine);
+  documentOptions.getElementById('country_namespace').addEventListener('command', updateSearchEngine);
 
 }
 
@@ -237,11 +237,11 @@ function updateSearchEngine() {
   selectSearch = true;
   removeSearchEngine();
   addSearchEngine();
-  documentOptions.getElementById('save').label = 'Saved.';
+  //documentOptions.getElementById('save').label = 'Saved.';
 }
 
 function resetSaveButton() {
-  documentOptions.getElementById('save').label = 'Save';
+  //documentOptions.getElementById('save').label = 'Save';
 }
 
 function setSystemLanguageAndCountryToPreferences() {
