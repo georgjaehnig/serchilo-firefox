@@ -7,7 +7,6 @@ Cu.import("resource://gre/modules/Services.jsm");
 var language_namespace = 'de';
 var country_namespace = 'deu';
 var default_keyword = 'g';
-var usage_type = 'n';
 var user_name = '';
 
 var documentOptions;
