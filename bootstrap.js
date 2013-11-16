@@ -12,15 +12,13 @@ var user_name = '';
 
 var documentOptions;
 
-const domain_path = 'http://www.serchilo.net/';
-let engine_details = {
+var engine_details = {
   name:             'Serchilo: de.deu',
   usage_type:       'n',
   namespace_path:   'de.deu',
   default_keyword:  '',
   description:      'Serchilo.net, added by Firefox addon'
 };
-
 
 const ENGINE_XML_TEMPLATE = '<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/"> <ShortName>{name}</ShortName> <Description>{description}</Description> <Url xmlns:s="http://serchilo.net/opensearchextensions/1.0/" type="text/html" method="get" template="http://www.serchilo.net/{usage_type}/{namespace_path}?source=firefox-addon&amp;query={searchTerms}&amp;{default_keyword_parameter}"/> <Url type="application/x-suggestions+json" template="http://www.serchilo.net/opensearch-suggestions/{usage_type}/{namespace_path}?source=firefox-addon&amp;query={searchTerms}"/> <Image width="16" height="16"> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </Image> <Contact>opensearch@serchilo.net</Contact> <moz:SearchForm>http://www.serchilo.net/{usage_type}/{namespace_path}</moz:SearchForm> <moz:IconUpdateUrl> http://www.serchilo.net/sites/all/themes/custom/temo/favicon.ico </moz:IconUpdateUrl> <moz:UpdateInterval>7</moz:UpdateInterval> <Query role="example" searchTerms="g berlin"/> <InputEncoding>utf-8</InputEncoding> <Tags/> </OpenSearchDescription>';
 
@@ -163,6 +161,10 @@ function showAndHideOptions() {
 // search engine add & removal
 function addSearchEngine() {
 
+  let engine_details = getEngineDetailsFromPrefs();
+
+  dump(engine_details.usage_type);
+
   // Only add the engine if it doesn't already exist.
   let engine = Services.search.getEngineByName(engine_details.name);
   if (engine) {
@@ -186,6 +188,13 @@ function addSearchEngine() {
 
     Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
   }
+}
+
+function getEngineDetailsFromPrefs() {
+
+  engine_details.usage_type = (user_name == '' ? 'n' : 'u');
+
+  return engine_details;
 }
 
 function removeSearchEngine() {
