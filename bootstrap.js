@@ -59,23 +59,21 @@ function wrap_xml_into_data_uri(xml) {
 
 // CORE FUNCTIONS ===============================================
 
-let optionObserver = {
-    observe: function(subject, topic, data) {
-     
-	 		documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
-			showAndHideOptions();
-       
-	  	var saveButton = documentOptions.getElementById('save');
-      //saveButton.addEventListener('command', this.save);
-      //saveButton.addEventListener('command', updateSearchEngine);
+function optionObserver (subject, topic, data) {
 
-      var typeSelect = documentOptions.getElementById('usage_type');
-      typeSelect.addEventListener('command', showAndHideOptions);
+	documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
+	showAndHideOptions();
 
-    }
+	var saveButton = documentOptions.getElementById('save');
+	//saveButton.addEventListener('command', this.save);
+	//saveButton.addEventListener('command', updateSearchEngine);
+
+	var typeSelect = documentOptions.getElementById('usage_type');
+	typeSelect.addEventListener('command', showAndHideOptions);
+
 }
 
-var showAndHideOptions = function showAndHideOptions() {
+function showAndHideOptions() {
 
 	usage_type = Services.prefs.getCharPref('extensions.serchilo.usage_type');
 
