@@ -14,6 +14,14 @@
   </menulist>
 </setting>
 
+<setting 
+  type="string"
+	id="user_name"
+	pref="extensions.serchilo.user_name"
+  title="Serchilo user name"
+>
+If you have a Serchilo user account, enter your user name here. All your user settings will be used by this extension. The options below become obsolete.
+</setting>
 
 
 <setting 
@@ -22,6 +30,7 @@
 	pref="extensions.serchilo.language_namespace"
 	title="Language namespace"
 >
+Only if no user name provided.
   <menulist>
     <menupopup>
 <menuitem value="ab" label="Abkhazian"/>
@@ -211,6 +220,7 @@
 	pref="extensions.serchilo.country_namespace"
 	title="Country namespace"
 >
+Only if no user name provided.
   <menulist>
     <menupopup>
 <menuitem value="afg" label="Afghanistan"/>
@@ -474,15 +484,8 @@
   title="Custom namespaces"
 >
 
-	Optional. Add additional namespaces, seperated with ".". 
-</setting>
-
-<setting 
-  type="string"
-	id="user_name"
-	pref="extensions.serchilo.user_name"
-  title="Serchilo user name"
->
+Optional and only if no user name provided.
+Add additional namespaces, seperated with ".". 
 </setting>
 
 <setting 
@@ -491,6 +494,8 @@
 	pref="extensions.serchilo.default_keyword"
   title="Default keyword"
 	>
+
+Optional and only if no user name provided.
 A default keyword will be used if no Serchilo command was found in your search query. Defaults to Google.
 </setting>
 

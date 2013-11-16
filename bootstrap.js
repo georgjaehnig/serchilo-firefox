@@ -59,7 +59,47 @@ function wrap_xml_into_data_uri(xml) {
 
 // CORE FUNCTIONS ===============================================
 
+let optionObserver = {
+    observe: function(subject, topic, data) {
+     
+	 		documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
+			showAndHideOptions();
+       
+	  	var saveButton = documentOptions.getElementById('save');
+      //saveButton.addEventListener('command', this.save);
+      //saveButton.addEventListener('command', updateSearchEngine);
+
+      var typeSelect = documentOptions.getElementById('usage_type');
+      typeSelect.addEventListener('command', showAndHideOptions);
+
+    }
+}
+
+var showAndHideOptions = function showAndHideOptions() {
+
+	usage_type = Services.prefs.getCharPref('extensions.serchilo.usage_type');
+
+	switch (usage_type) {
+	case 'n':
+		documentOptions.getElementById('user_name').collapsed = true;
+		documentOptions.getElementById('language_namespace').collapsed = false;
+		documentOptions.getElementById('country_namespace').collapsed = false;
+		documentOptions.getElementById('custom_namespaces').collapsed = false;
+		documentOptions.getElementById('default_keyword').collapsed = false;
+		break;
+	case 'u':
+		documentOptions.getElementById('user_name').collapsed = false;
+		documentOptions.getElementById('language_namespace').collapsed = true;
+		documentOptions.getElementById('country_namespace').collapsed = true;
+		documentOptions.getElementById('custom_namespaces').collapsed = true;
+		documentOptions.getElementById('default_keyword').collapsed = true;
+		break;
+	}
+}
+
 function startup(data, reason) {
+
+	Services.obs.addObserver(optionObserver, 'addon-options-displayed', false);
 
   firstRun = reason == ADDON_INSTALL;
   // Re-select the search engine if this is the first run
@@ -92,6 +132,11 @@ function startup(data, reason) {
 }
 
 function shutdown(data, reason) {
+  try {
+    Services.obs.removeObserver(optionObserver, 'addon-options-displayed');
+  }
+  catch (e) {}
+
   // Remove our observer, if necessary
   if (reason != APP_SHUTDOWN)
     removeObserver();
