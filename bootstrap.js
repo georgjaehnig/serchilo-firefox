@@ -59,7 +59,11 @@ function wrap_xml_into_data_uri(xml) {
 
 // CORE FUNCTIONS ===============================================
 
-function optionObserver (subject, topic, data) {
+function optionObserver(subject, topic, data) {
+
+  if (topic != "addon-options-displayed") {
+    return;
+  }
 
 	documentOptions = subject.QueryInterface(Ci.nsIDOMDocument);
 	showAndHideOptions();
