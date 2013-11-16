@@ -23,6 +23,8 @@ var firstRun = false;
 // Decide whether to select the search engine.
 var selectSearch = false;
 
+// HELPER FUNCTIONS ===============================================
+
 function removeObserver() {
   try {
     Services.obs.removeObserver(searchObserver, ENGINE_ADDED);
@@ -49,6 +51,13 @@ function searchObserver(engine, topic, data) {
     }
   }
 }
+
+function wrap_xml_into_data_uri(xml) {
+  let uri = 'data:text/xml;charset=utf-8,' + escape(xml);
+  return uri;
+}
+
+// CORE FUNCTIONS ===============================================
 
 function startup(data, reason) {
 
@@ -80,11 +89,6 @@ function startup(data, reason) {
 
 		Services.search.addEngine(engine_uri, Ci.nsISearchEngine.DATA_XML, null, false);
   }
-}
-
-function wrap_xml_into_data_uri(xml) {
-  let uri = 'data:text/xml;charset=utf-8,' + escape(xml);
-  return uri;
 }
 
 function shutdown(data, reason) {
