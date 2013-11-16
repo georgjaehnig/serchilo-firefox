@@ -11,13 +11,6 @@ var preferences = {
   user_name: ''
 }
 
-// defaults
-var language_namespace = 'de';
-var country_namespace = 'deu';
-var custom_namespaces = '';
-var default_keyword = 'g';
-var user_name = '';
-
 var documentOptions;
 
 var engine_details = {
@@ -158,7 +151,7 @@ function wrap_xml_into_data_uri(xml) {
 
 function showAndHideOptions() {
 
-  user_name = Services.prefs.getCharPref('extensions.serchilo.user_name');
+  let user_name = Services.prefs.getCharPref('extensions.serchilo.user_name');
 
   if (user_name == '') {
     documentOptions.getElementById('language_namespace').collapsed = false;
@@ -217,7 +210,7 @@ function updateEngineDetailsFromPreferences() {
     }
     engine_details.name = 'Serchilo: ' + engine_details.namespace_path;
     if (preferences.default_keyword != '') {
-      engine_details.name += ' | ' + default_keyword;
+      engine_details.name += ' | ' + preferences.default_keyword;
     }
     break; 
   case 'u':
