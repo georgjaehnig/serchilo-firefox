@@ -65,8 +65,6 @@ function wrap_xml_into_data_uri(xml) {
   return uri;
 }
 
-// CORE FUNCTIONS ===============================================
-
 function optionObserver(subject, topic, data) {
 
   if (topic != "addon-options-displayed") {
@@ -85,6 +83,14 @@ function optionObserver(subject, topic, data) {
 
 }
 
+function removeOptionObserver() {
+  try {
+    Services.obs.removeObserver(optionObserver, 'addon-options-displayed');
+  }
+  catch (e) {}
+}
+
+
 function showAndHideOptions() {
 
   user_name = Services.prefs.getCharPref('extensions.serchilo.user_name');
@@ -102,6 +108,8 @@ function showAndHideOptions() {
     documentOptions.getElementById('default_keyword').collapsed = true;
   }
 }
+
+// CORE FUNCTIONS ===============================================
 
 function startup(data, reason) {
 
@@ -138,12 +146,8 @@ function startup(data, reason) {
 }
 
 function shutdown(data, reason) {
-  try {
-    Services.obs.removeObserver(optionObserver, 'addon-options-displayed');
-  }
-  catch (e) {}
 
-  // Remove our observer, if necessary
+  removeOptionObserver();
   if (reason != APP_SHUTDOWN)
     removeSearchObserver();
 
