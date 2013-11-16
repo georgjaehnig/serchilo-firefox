@@ -227,6 +227,10 @@ function updateEngineDetailsFromPreferences() {
       engine_details.name += ' | ' + default_keyword;
     }
     break; 
+  case 'n':
+    engine_details.namespace_path = preferences.user_name;
+    engine_details.name = 'Serchilo: ' + preferences.user_name;
+    break; 
   }
 }
 
