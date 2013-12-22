@@ -189,12 +189,12 @@ function addSearchEngine() {
     }
 
     let engine_xml = ENGINE_XML_TEMPLATE;
-    engine_xml = engine_xml.replace('{name}', engine_details.name);
-    engine_xml = engine_xml.replace('{description}', engine_details.description);
-    engine_xml = engine_xml.replace('{usage_type}', engine_details.usage_type);
-    engine_xml = engine_xml.replace('{namespace_path}', engine_details.namespace_path);
+    engine_xml = engine_xml.replace(/{name}/g, engine_details.name);
+    engine_xml = engine_xml.replace(/{description}/g, engine_details.description);
+    engine_xml = engine_xml.replace(/{usage_type}/g, engine_details.usage_type);
+    engine_xml = engine_xml.replace(/{namespace_path}/g, engine_details.namespace_path);
 
-    engine_xml = engine_xml.replace('{default_keyword}', preferences.default_keyword);
+    engine_xml = engine_xml.replace(/{default_keyword}/g, preferences.default_keyword);
 
     let engine_uri = wrap_xml_into_data_uri(engine_xml);
 
