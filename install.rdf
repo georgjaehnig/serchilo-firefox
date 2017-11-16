@@ -9,10 +9,11 @@
     <em:description>Use Serchilo.net within Firefox search and address bar</em:description>
 		<em:homepageURL>http://www.serchilo.net/app/firefox</em:homepageURL>
     <em:creator>Georg Jaehnig</em:creator>
-    <em:version>1.0.5</em:version>
+    <em:version>1.0.6</em:version>
 
     <em:bootstrap>true</em:bootstrap>
     <em:type>2</em:type>
+		<em:multiprocessCompatible>true</em:multiprocessCompatible>
 
     <em:targetApplication>
       <Description>
